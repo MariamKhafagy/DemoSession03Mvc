@@ -1,3 +1,8 @@
+using Demo.BLL;
+using Demo.DAL.Data.Contexts;
+using Demo.DAL.Reposatories;
+using Microsoft.EntityFrameworkCore;
+
 namespace Demo.PL
 {
     public class Program
@@ -6,8 +11,30 @@ namespace Demo.PL
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Configure Services : Add Services to the DI container .
             builder.Services.AddControllersWithViews();
+            // builder.Services.AddScoped<ApplicationDbContext>(); //Register Service  
+            //Give ClR Permission to Inject Dervice If Needed  
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                //var conString = builder.Configuration["ConnectionSreings : DefaultConnection"];
+                //var conString = builder.Configuration.GetSection("ConnectionStrings")["ConnectionSreings : DefaultConnection"];
+                var conString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+                options.UseSqlServer(conString);
+
+
+            });
+
+            #endregion
+
+           
+
+           // builder.Services.AddScoped<DepartmentService>();
+
+
+
 
             var app = builder.Build();
 
@@ -34,6 +61,8 @@ namespace Demo.PL
                 .WithStaticAssets();
 
             app.Run();
+
+
         }
     }
 }
