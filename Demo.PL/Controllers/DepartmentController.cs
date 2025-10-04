@@ -1,17 +1,19 @@
-﻿using Demo.BLL;
+﻿using Demo.BLL.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.PL.Controllers
 {
-    public class DepartmentController
+    public class DepartmentController(IDepartmentService _departmentService): Controller
     {
-        //DepartmentService departmentService Used Acros All Actions
-        // EmployeeService --> Assign Manager : This Service Needed Only For Ine Action 
-        public DepartmentController(DepartmentService departmentService) //Call Service Department Service
-        {
-
-        
-        }//Ask Clr To Create object From DepartmentService
-
-
+        //Get BaseUrl/Departmetns/Index
+        [HttpGet]
+        public IActionResult Index() 
+        { 
+            var departments=_departmentService.GetAllDepartments();
+            return View(departments);
+ 
+        }
     }
 }
+
+ 

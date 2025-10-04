@@ -1,4 +1,5 @@
-using Demo.BLL;
+﻿using Demo.BLL;
+using Demo.BLL.Services;
 using Demo.DAL.Data.Contexts;
 using Demo.DAL.Reposatories;
 using Microsoft.EntityFrameworkCore;
@@ -26,14 +27,14 @@ namespace Demo.PL
 
 
             });
+            builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>(); // interface with his Service  بديلو ال   
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();   
+
 
             #endregion
 
-           
 
-           // builder.Services.AddScoped<DepartmentService>();
-
-
+            // builder.Services.AddScoped<DepartmentService>();
 
 
             var app = builder.Build();
