@@ -10,6 +10,7 @@ namespace Demo.PL.Controllers
         public IActionResult Index() 
         { 
             var departments=_departmentService.GetAllDepartments();
+
             return View(departments);
  
         }
