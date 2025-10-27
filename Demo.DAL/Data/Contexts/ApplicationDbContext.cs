@@ -1,4 +1,6 @@
 ﻿using Demo.DAL.Data.Configuration;
+using Demo.DAL.Models.DepartmentModel;
+using Demo.DAL.Models.EmployeeModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,17 @@ namespace Demo.DAL.Data.Contexts
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public DbSet<Department>Departments { get; set; }
+        public DbSet<Models.DepartmentModel.Department>Departments { get; set; }
+        
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer("ConnectingString");
         //}
+        public DbSet<Models.EmployeeModel.Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Department>(new DepartmentConfiguration());
+            modelBuilder.ApplyConfiguration<Models.DepartmentModel.Department>(new DepartmentConfiguration());
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }

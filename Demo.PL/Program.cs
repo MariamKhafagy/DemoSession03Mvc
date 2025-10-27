@@ -1,8 +1,13 @@
 ﻿using Demo.BLL;
-using Demo.BLL.Services;
+using Demo.BLL.MappingProfiles;
+using Demo.BLL.Services.Classes;
+using Demo.BLL.Services.Interfaces;
 using Demo.DAL.Data.Contexts;
-using Demo.DAL.Reposatories;
+using Demo.DAL.Reposatories.Classes;
+using Demo.DAL.Reposatories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Demo.PL
 {
@@ -28,7 +33,13 @@ namespace Demo.PL
 
             });
             builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>(); // interface with his Service  بديلو ال   
-            builder.Services.AddScoped<IDepartmentService, DepartmentService>();   
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeReposirtory, EmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+
+            // builder.Services.AddAutoMapper(typeof(ProjectReference).Assembly); //Need To Add using AutoMapper
+            builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
 
 
             #endregion
