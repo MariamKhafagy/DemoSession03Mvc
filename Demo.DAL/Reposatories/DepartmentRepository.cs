@@ -14,15 +14,8 @@ namespace Demo.DAL.Reposatories
     // High Level Model
     {
 
-
-
         //CRUD
         //Get Department ID
-
-
-
-
-
 
         public Department? GetById(int id)
         {
